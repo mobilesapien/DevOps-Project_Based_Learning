@@ -189,3 +189,5 @@ Reload your browser to confirm.
 
 Once completed, deleted tthe files created, because it contains sensitive info about php configuration and also ubuntu server.
 
+`$ sudo rm /var/www/projectlamp/index.php`
+
