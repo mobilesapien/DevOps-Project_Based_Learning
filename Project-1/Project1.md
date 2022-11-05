@@ -137,6 +137,13 @@ Finally, Apache2 was reloaded for the changes to take effect:
 `$ sudo systemctl reload apache2`
 
 
+Since the web root /var/www/projectlamp is still empty, I created an index.html file in that location so that we can test that the virtual host works as expected:
 
+```
+sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
+```
 
+Confirm this by checking with curl or browser:
+
+`$ sudo curl http://<Public-IP-Address>:80`
 
