@@ -39,7 +39,8 @@ Also by typing the public IP address of the EC2 instance on any browser of our c
 ![Can Access Webserver](./images/Web%20Server.png)
 
 ---
-**STEP 2 — INSTALLING MYSQL**
+
+***STEP 2 — INSTALLING MYSQL***
 
 ---
 
@@ -68,7 +69,9 @@ Start the interactive script by running:
 
 `sudo mysql_secure_installation`
 
-**STEP 3 — INSTALLING PHP**
+---
+
+***STEP 3 — INSTALLING PHP***
 
 ---
 
@@ -116,6 +119,7 @@ I pasted the following configuration into the empty file created:
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+
 I enabled the new virtual hoste using:
 
 `$ sudo a2ensite projectlamp`
@@ -136,7 +140,6 @@ Finally, Apache2 was reloaded for the changes to take effect:
 
 `$ sudo systemctl reload apache2`
 
-
 Since the web root /var/www/projectlamp is still empty, I created an index.html file in that location so that we can test that the virtual host works as expected:
 
 ```
@@ -146,4 +149,43 @@ sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/met
 Confirm this by checking with curl or browser:
 
 `$ sudo curl http://<Public-IP-Address>:80`
+
+
+---
+
+***STEP 5 — ENABLE PHP ON THE WEBSITE***
+
+---
+
+First we need to update the directory index, to ensure that index.php takes precedence over index.html:
+
+`$ sudo vim /etc/apache2/mods-enabled/dir.conf`
+
+```
+<IfModule mod_dir.c>
+        #Change this:
+        #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+        #To this:
+        DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
+```
+
+Then restart Apache for changes to take effect:
+
+`$ sudo systemctl reload apache2`
+
+Next is to create a script to test that php is working successfully:
+
+`$ sudo vim /var/www/projectlamp/index.php`
+
+Enter the following:
+
+```
+<?php
+phpinfo();
+```
+
+Reload your browser to confirm.
+
+Once completed, deleted tthe files created, because it contains sensitive info about php configuration and also ubuntu server.
 
