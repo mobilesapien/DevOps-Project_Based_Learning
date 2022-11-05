@@ -20,8 +20,33 @@ We should get the following as output:
 
 ![Apache Installed](./images/Apache%20Installed%20and%20running.png)
 
-Since our Ubuntu server is an EC2 instance, we need to open TCP port 80 in the EC2 Instance
+Since our Ubuntu server is an EC2 instance, we need to open TCP port 80 in the EC2 Instance.
 
+We can confirm by running the below in our ubuntu shell:
+
+`curl http://localhost:80`
+
+or
+
+`curl http://127.0.0.1:80`
+
+Also by typing the public IP address of the EC2 instance on any browser of our choice, we confirm once the default Apache page loads as seen in the output below:
+
+![Can Access Webserver](./images/Web%20Server.png)
+
+**STEP 2 — INSTALLING MYSQL**
+
+---
+
+The  First thing to do is Installing the mysql-server using the code below:
+
+`$ sudo apt install mysql-server`
+
+Once installation is complete, log in to the MySQL console by typing:
+
+`$ sudo mysql`
+
+![mysql login](./images/mysql%20login.png)
 
 
 
