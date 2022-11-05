@@ -38,6 +38,7 @@ Also by typing the public IP address of the EC2 instance on any browser of our c
 
 ![Can Access Webserver](./images/Web%20Server.png)
 
+---
 **STEP 2 — INSTALLING MYSQL**
 
 ---
@@ -54,7 +55,7 @@ Once installation is complete, log in to the MySQL console by typing:
 
 It’s recommended that you run a security script that comes pre-installed with MySQL. This script will remove some insecure default settings and lock down access to your database system. Before running the script you will set a password for the root user, using mysql_native_password as default authentication method. We’re defining this user’s password as PassWord.1.
 
-`ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';`
+`mysql > ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';`
 
 output:
 ![rootuser](./images/root%20user%20password.png)
@@ -66,3 +67,21 @@ Exit MYSQL Shell with:
 Start the interactive script by running:
 
 `sudo mysql_secure_installation`
+
+**STEP 3 — INSTALLING PHP**
+
+---
+
+First we will proceed to installing php. libapache2-mod-php and php-mysql
+
+`$ sudo apt install php libapache2-mod-php php-mysql`
+
+Once this is complete, confirm PHP version using:
+
+`$ php -v`
+
+Output should be similar to this:
+
+![PHP Version](./images/PHP%20Version.png)
+
+With these steps, we now have a fully functional LAMP stack.
