@@ -85,3 +85,58 @@ Output should be similar to this:
 ![PHP Version](./images/PHP%20Version.png)
 
 With these steps, we now have a fully functional LAMP stack.
+
+---
+
+***STEP 4 — CREATING A VIRTUAL HOST FOR WEBSITE USING APACHE***
+
+---
+
+First we need to create directory for domain "projectlamp"using **mkdir** command as follows:
+
+`$ sudo mkdir /var/www/projectlamp`
+
+Then I assigned ownership of the directory with my current system user:
+
+`$ sudo chown -R $USER:$USER /var/www/projectlamp`
+
+Next, i created and opened a new configuration file in APache's sites-available directory using **VI** command line editor.
+
+`$ sudo vi /etc/apache2/sites-available/projectlamp.conf`
+
+I pasted the following configuration into the empty file created:
+
+```
+<VirtualHost *:80>
+    ServerName projectlamp
+    ServerAlias www.projectlamp 
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/projectlamp
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+I enabled the new virtual hoste using:
+
+`$ sudo a2ensite projectlamp`
+
+Then proceed to run the below to disable the default website that comes with Apache:
+
+`$ sudo a2dissite 000-default`
+
+And confirmed that the coniguration file does not contain sysntax errors, using:
+
+`$ sudo apache2ctl configtest`
+
+Output:
+
+![Syntax Ok](./images/Syntax%20Ok.png)
+
+Finally, Apache2 was reloaded for the changes to take effect:
+
+`$ sudo systemctl reload apache2`
+
+
+
+
+
