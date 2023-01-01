@@ -65,3 +65,50 @@ sudo apt install php-fpm php-mysql
 ```
 * When pompted type ```Y``` and press ```Enter```.
 * PHP is successfuly Installed and configured.
+
+### STEP 4 - CONFIGURING NGINX TO USE PHP PROCESSOR
+
+#### Steps
+
+* PHP is installed. Next is to configure Nginx to use php components.
+* create a root web directory for domain as follows: ``` sudo mkdir /var/www/projectLEMP ```
+* Proceed to change ownership of this directory: ``` sudo chown -R $USER:$USER /var/www/projectLEMP ```
+* Using any text editor, create a new configuration file for the domain: ``` sudo nano /etc/nginx/sites-available/projectLEMP ```
+* once the new file is opened, enter the following configuration:
+```
+server {
+    listen 80;
+    server_name projectLEMP www.projectLEMP;
+    root /var/www/projectLEMP;
+
+    index index.html index.htm index.php;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+     }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+}
+```
+* Activate the configuration by linking to the config file from Nginx's ``` sites-enabled ``` directory:
+```
+sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
+```
+* Test the configuration using ``` sudo nginx -t ```
+* ![Nginx Test](./images/7%20-%20Nginx_test.png "test is ok")
+* Disable the default nginx host that is currently configured to listen on port 80, for this, run: ``` sudo unlink /etc/nginx/sites-enabled/default ```
+* Then restart nginx: ``` sudo systemctl reload nginx ```
+* We can then create an index.html file in the new location to test that the new server block works as expected:
+```
+sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
+```
+* From your browser, try and open the url using IP address ``` http://<public-IP-Address>:80```
+* Your LEMP stack is now fully configured. In the next step, we’ll create a PHP script to test that Nginx is in fact able to handle .php files within your newly configured website.
