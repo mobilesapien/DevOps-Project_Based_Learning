@@ -59,4 +59,9 @@ sudo mysql
 ### STEP 3 - INSTALLING PHP
 #### Steps
 
-
+* Installl PHP to process code and generate dynamic content for the web server using the following command
+```
+sudo apt install php-fpm php-mysql
+```
+* When pompted type ```Y``` and press ```Enter```.
+* PHP is successfuly Installed and configured.
