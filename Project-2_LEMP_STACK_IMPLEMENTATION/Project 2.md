@@ -45,7 +45,7 @@ sudo apt install mysql-server
 ``` 
 sudo mysql
 ```
-![MySQL](./images/3%20-%20Connecting_to_Mysql.png "MySQL Console"
+![MySQL](./images/3%20-%20Connecting_to_Mysql.png "MySQL Console")
 
 * It’s recommended that you run a security script that comes pre-installed with MySQL. This script will remove some insecure default settings and lock down access to your database system. Before running the script you will set a password for the root user, using mysql_native_password as default authentication method. We’re defining this user’s password as PassWord.1.
 ![Security Script](./images/4%20-%20Security_Script.png "Securing the sql database")
