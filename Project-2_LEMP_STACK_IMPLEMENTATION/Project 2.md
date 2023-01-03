@@ -112,3 +112,6 @@ sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/met
 ```
 * From your browser, try and open the url using IP address ``` http://<public-IP-Address>:80```
 * Your LEMP stack is now fully configured. In the next step, we’ll create a PHP script to test that Nginx is in fact able to handle .php files within your newly configured website.
+
+### STEP 5 - TESTING PHP WITH NGINX
+#### Steps 
